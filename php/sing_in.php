@@ -1,10 +1,10 @@
 <?php
 	function find_username_password($userInfo, $userpass) {
-		for($i=0;$i < count($userInfo);$i++) {
-			if($userpass == $userInfo[i]) {
+		foreach($userInfo as $i) {
+			if($i == $userpass)
 				return 1;
-			}
 		}
+
 		return 0;
 	}
 
@@ -15,11 +15,11 @@
 
 	while(!feof($rfile)) {
 		$line = fgets($rfile);
-		$userInfo = explode("#", $line);
 
-		if(find_username_password($userInfo, $username)) {
-			if(find_username_password($userInfo, $password)) {
+		if(find_username_password(explode("#", $line), $username)) {
+			if(find_username_password(explode("#",$line), $password)) {
 				echo "Giris basarili.<br>";
+				break;
 			} else {
 				echo "Sifre yanlis!..<br>";
 			}
